@@ -6,6 +6,13 @@ User = get_user_model()
 
 
 class Post(models.Model):
+    """
+    Модель публикации.
+    Поля: заголовок, текст, дата и время публикации, автор публикации,
+    местоположение, категория, фото, флаг опубликовано/скрыто,
+    время создания (автоматически)
+    """
+
     title = models.CharField('Заголовок', max_length=256)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
@@ -36,6 +43,11 @@ class Post(models.Model):
 
 
 class Category(models.Model):
+    """
+    Модель категории. Поля: заголовок, описание, слаг,
+    флаг опубликовано/скрыто, время добавления (автоматически)
+    """
+
     title = models.CharField('Заголовок', max_length=256)
     description = models.TextField('Описание')
     slug = models.SlugField(
@@ -56,6 +68,11 @@ class Category(models.Model):
 
 
 class Location(models.Model):
+    """
+    Модель местоположения. Поля: название места, флаг опубликовано/скрыто,
+    время добавления (автоматически)
+    """
+
     name = models.CharField('Название места', max_length=256)
     is_published = models.BooleanField(
         'Опубликовано', default=True,
@@ -71,6 +88,11 @@ class Location(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Модель комментария. Поля: текст, пост (FK к публикации),
+    время добавления (автоматически), автор.
+    """
+
     text = models.TextField('Текст комментария')
     post = models.ForeignKey(
         Post,
